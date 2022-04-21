@@ -23,7 +23,7 @@ services:
       context: ./server
     volumes:
       - /app/node_modules
-      - ./server:/app  
+      - ./server:/app
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -33,14 +33,14 @@ services:
       - PGPASSWORD=postgres_password
       - PGPORT=5432
   client:
-    build:
-      dockerfile: Dockerfile.dev 
-      context: ./client
-    volumes:
-      - /app/node_modules 
-      - ./client:/app 
     environment:
       - WDS_SOCKET_PORT=0
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
   worker:
     build:
       dockerfile: Dockerfile.dev
@@ -50,4 +50,4 @@ services:
       - ./worker:/app
     environment:
       - REDIS_HOST=redis
-      - REDIS_PORT=6379         
+      - REDIS_PORT=6379
